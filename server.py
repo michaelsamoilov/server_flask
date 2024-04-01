@@ -1,7 +1,6 @@
-import os
 # импортируем библиотеки
+import os
 from flask import Flask, request, jsonify
-import logging
 
 # создаём приложение
 # мы передаём __name__, в нём содержится информация,
@@ -12,8 +11,6 @@ import logging
 # то мы бы получили 'logging'
 app = Flask(__name__)
 
-# Устанавливаем уровень логирования
-logging.basicConfig(level=logging.INFO)
 
 # Создадим словарь, чтобы для каждой сессии общения
 # с навыком хранились подсказки, которые видел пользователь.
@@ -33,8 +30,6 @@ sessionStorage = {}
 # Внутри функции доступен request.json - это JSON,
 # который отправила нам Алиса в запросе POST
 def main():
-    logging.info(f'Request: {request.json!r}')
-
     # Начинаем формировать ответ, согласно документации
     # мы собираем словарь, который потом отдадим Алисе
     response = {
@@ -50,8 +45,7 @@ def main():
     # непосредственно за ведение диалога
     handle_dialog(request.json, response)
 
-    logging.info(f'Response:  {response!r}')
-
+    
     # Преобразовываем в JSON и возвращаем
     return jsonify(response)
 
